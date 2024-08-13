@@ -1,6 +1,5 @@
 # Aula 5 - Pacotes
 
-
 ## Setup
 
 Visando evitar conflitos  entre dependencias de outros projetos python vamos criar um ambiente virtual. Uma das forma de fazer isso é utilizando o seguinte comando:
@@ -33,6 +32,8 @@ Exemplo de configuração:
 ## Desenvolvendo o pacote
 
 Colocar na raiz do repositório o folder ```src``` e dentro o folder com o seu pacote (no nosso caso ```ml_communication```) é um padrão utilizado na industria.
+
+> ***[IMPORTANTE] O nome de projeto deve ser único no index que vamos coloca-lo (exemplo de indice: PyPI), logo se voce quiser reproduzir a aula. Coloque um sufixo com o seu nome para diminuir a chance de conflitos.***
 
 Perceba que o nome do folder do seu pacote representa a forma como voce vai importar ele:, no nosso caso:
 
@@ -101,6 +102,12 @@ twine check dist/*
 python -m twine upload --repository testpypi dist/*
 ```
 
+Após o Upload do pacote voce vai ter uma pagina no indice PyPI de Teste com o seu pacote:
+
+<center><img src="./figures/pypi_description_page.png" width=380/></center>
+
+Nome da pagina ```https://test.pypi.org/project/ml-communication/```. Assista a aula para saber mais sobre essa página.
+
 ## Baixando o pacote
 
 Como estamos subimos um pacote no index de teste nao podemos utilizar o index *default*. Vamos indicar via parametro ```--index-url``` qual *url* utilizar:
@@ -108,23 +115,42 @@ Como estamos subimos um pacote no index de teste nao podemos utilizar o index *d
 pip install --index-url https://test.pypi.org/simple/ <package-name>
 ```
 
-No exemplo dessa aula:
+No exemplo desta aula:
 ```bash
 pip install --index-url https://test.pypi.org/simple/ ml-communication
 ```
 
 # Versionamento
 
-Links interessantes:
-> https://github.com/c4urself/bump2version/blob/master/RELATED.md
+Todo pacote é versionado, logo vamos explorar minimamente o padrão mais utilizado de versionamento. A versão do pacote é composta de três números separados entre si por um ponto final, exemplo x.y.z, onde x, y e z são respectivamente a versão *major*, *minor* e *patch*. Esses números são alterados a conforme o que o desenvolvedor quer transmitir de informação para quem utiliza seu pacote:
 
-Git suporta dois tipos de tags: ```lightweight``` e ```annotated```.
+- *major*: Voce realiza uma mudança que não é retrocompatível com versões anteriores, isto é, se alguém baixar o código novo provavelmente o código não vai funcionar. Como exemplo, mudar o nome de um parametro de uma função de interface.
+- *minor*: Quando uma funcionalidade nova é adicionada de forma retrocompatível. Como exemplo, implementar uma nova função.
+- *patch*: Quando é realizado uma correção de alguma funcionalidade. Como exemplo, correção de uma função que quebrava quando recebia uma string de parametro com um nome especifico.
 
-Uma tag leve é muito parecida com um branch que não muda — é apenas um ponteiro para um commit específico.
+Perceba que essa padronização nos ajuda a entender quando ouve uma mudança, exemplo:
 
-Tags anotadas, no entanto, são armazenadas como objetos completos no banco de dados do Git.
+- Se o pacote alterou da versão 0.0.1 para 0.0.2 voce sabe que voce pode utilizar a versão 0.0.2 e seu código continuara funcionando da mesma forma.
+- Se o pacote alterou da versão 0.0.1 para 0.1.0 voce sabe que pode utilizar a versão 0.1.0 que seu pacote continuara funcionando da mesma forma e voce tera funcionalidades novas a sua disposição.
+- Se o pacote alterou da versão 0.0.1 para 1.0.0 voce sabe que se utilizar a versão 1.0.0 pode ser que seu código quebre.
 
-Para adicionar uma tag ```annotated```:
+Essa padronização explica porque vemos tantas vezes o arquivo ```requirements.txt``` instalando pacotes assim:
+```bash
+pydantic==2.*
+```
+
+Entretanto, em aplicações (não desenvolvimento de dependências) pode fazer sentido fixar as dependencias (pacotes) utilizados.
+
+Por último, a [PEP440](https://peps.python.org/pep-0440/) especifica como o versionamento deve ser feito e introduz o conceito de pacote com uma certa versão em desenvolvimento, também chamado de *pre-release*, como exemplo: 0.0.1.post0, 0.0.1.dev0 ou a combinação desses sufixos.
+
+Nesta aula vamos fazer o update de versão, processo denominado *bump*, utilizando um pacote chamado *setuptools_scm*. Basicamente, o pacote atualiza a versão patch toda vez que o *build* é feito e existe um arquivo com estado diferente de *unchanged* no repositório. Além disso, usamos tags do git para fixar as versões prontas para uso. Para ver isso em ação assista a aula.
+
+Caso seja de interesse voce pode fazer o processo manualmente mudando a versão do pacote no *pyproject.toml* ou explorar um pacote alternativo (algumas possibilidades nesse [link](https://github.com/c4urself/bump2version/blob/master/RELATED.md)).
+
+
+As tags do git que vamos utilizar são as anotadas (annotated), as quais armazenam no banco de dados do Git um objeto inteiro representando o repositório naquele instante. Segue os comandos que vamos utilizar:
+
+- Para adicionar uma tag ```annotated```:
 ```bash
 git tag -a <version> -m <message>
 
@@ -134,7 +160,7 @@ Exemplos:
 git tag -a v0.0.1 -m "version 0.0.1"
 ```
 
-Para deletar uma tag:
+- Para deletar uma tag:
 ```bash
 git tag --delete <version>
 ```
