@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ml-communication" 
+authors = [
+    {name = "Rodrigo Castaldoni", email = "rodrigo.castal@fakeEmail.com"}
+]
+description = "Esse pacote vai ser utilizado na aula para mostrar como criar um pacote Python"
+readme = "README.md"
+requires-python = ">=3.11"
+dynamic = ["dependencies", "version"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools_scm]
+root="../"
+write_to = "src/ml_communication/_version.py"
+version_scheme = "no-guess-dev"
+local_scheme = "no-local-version"

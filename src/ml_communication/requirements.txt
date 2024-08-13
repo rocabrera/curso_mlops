@@ -1,0 +1,2 @@
+polars==1.4.1
+pydantic==2.8.2
