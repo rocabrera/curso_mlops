@@ -16,6 +16,6 @@ dynamic = ["dependencies", "version"]
 dependencies = {file = ["requirements.txt"]}
 
 [tool.setuptools_scm]
-write_to = "src/_version.py"
+# write_to = "src/_version.py"
 version_scheme = "no-guess-dev"
 local_scheme = "no-local-version"
