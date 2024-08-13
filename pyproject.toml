@@ -15,8 +15,6 @@ dynamic = ["dependencies", "version"]
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
-
 [tool.setuptools_scm]
-# write_to = "src/ml_communication/_version.py"
 version_scheme = "no-guess-dev"
 local_scheme = "no-local-version"

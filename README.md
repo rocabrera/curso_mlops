@@ -124,10 +124,17 @@ Uma tag leve é muito parecida com um branch que não muda — é apenas um pont
 
 Tags anotadas, no entanto, são armazenadas como objetos completos no banco de dados do Git.
 
+Para adicionar uma tag ```annotated```:
 ```bash
 git tag -a <version> -m <message>
+
+```
+Exemplos:
+```bash
+git tag -a v0.0.1 -m "version 0.0.1"
 ```
 
+Para deletar uma tag:
 ```bash
-python3 -m pip install --index-url https://test.pypi.org/simple/
+git tag --delete <version>
 ```
