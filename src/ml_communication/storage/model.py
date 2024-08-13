@@ -6,8 +6,7 @@ from abc import ABC, abstractmethod
 class ModelStorage(ABC):
     @abstractmethod
     def add(self, path: Path, model: Any) -> bool:
-        pass
-    
+        pass 
 
     @abstractmethod
     def delete(self, path: Path) -> bool:
