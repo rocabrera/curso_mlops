@@ -60,7 +60,7 @@ pip install -U build
 ```
 
 Executar o build:
-```
+```bash
 python -m build
 ```
 
