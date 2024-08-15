@@ -163,6 +163,5 @@ cython_debug/
 
 **/.DS_Store
 
-**/notebooks
-
+**/notebooks/models
 **/figures
