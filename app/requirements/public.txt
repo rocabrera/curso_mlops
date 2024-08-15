@@ -1,2 +1,3 @@
-fastapi[standard]
-pydantic
+fastapi[standard]==0.112.0
+pydantic==2.8.2
+scikit-learn==1.5.1

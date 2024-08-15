@@ -1,3 +1,10 @@
+# Em especifico usar o index de teste pode dar algumas problemas que fojem do escopo dessa aula.
+# O recomendado é ter um próprio index.
+
 --index-url https://test.pypi.org/simple/ 
 
-ml-communication
+# Algumas dependencias do pacote estão no indice default
+--extra-index-url https://pypi.org/simple/  
+
+
+ml-communication==0.0.4
