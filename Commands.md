@@ -1,9 +1,16 @@
 ## Develop API
 fastapi dev src/main.py 
 
-# Run Docker
-- docker build -t application .
-- docker container run -it --rm application bash
+# Docker
+
+Builda imagem
+> docker build -t application .
+
+Executa aplicação:
+> docker container run -p 8000:8000 --rm application
+
+Modo iterativo:
+> docker container run -it --rm application bash
 
 
 ## Post command:
