@@ -1,0 +1,4 @@
+pytest==8.*
+pytest-cov==5.*
+
+-r ../src/ml_communication/requirements.txt

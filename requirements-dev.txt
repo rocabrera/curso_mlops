@@ -1,0 +1,3 @@
+ruff
+
+-r tests/test-requirements.txt
