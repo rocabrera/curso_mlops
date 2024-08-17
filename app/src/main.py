@@ -2,9 +2,7 @@ import json
 import pickle
 from src.loader import storage
 from pydantic import BaseModel
-from fastapi import FastAPI, Response
-
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, Response, UploadFile
 
 app = FastAPI()
 
