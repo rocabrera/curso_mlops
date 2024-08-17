@@ -26,3 +26,7 @@ line-length = 100
 quote-style = "single"
 indent-style = "tab"
 docstring-code-format = true
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B301", "B403"]
