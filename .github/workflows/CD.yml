@@ -5,21 +5,21 @@ on:
   #   branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
 jobs:
-
-  environment:
-    name: testpypi
-    url: https://test.pypi.org/p/ml-communication
-
-  permissions:
-    contents: read
-    id-token: write
-
   CD:
     # Sem a tag needs o job de CD seria executado de forma paralela.
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
     runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/ml-communication
+
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Baixando repositório
         uses: actions/checkout@v4
