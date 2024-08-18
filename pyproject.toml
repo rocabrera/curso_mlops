@@ -9,7 +9,7 @@ authors = [
 ]
 description = "Esse pacote vai ser utilizado na aula para mostrar como criar um pacote Python"
 readme = "src/README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dynamic = ["dependencies", "version"]
 
 [tool.setuptools.dynamic]

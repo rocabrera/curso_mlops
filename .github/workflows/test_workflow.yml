@@ -9,7 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Baixando repositório
       - uses: actions/checkout@v4
 
-      - name: Hello World
-        run: echo Criando meu primeiro workflow
+      - name: Configurando Python
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.11'
+          # Optional - x64 or x86 architecture, defaults to x64
+          architecture: 'x64'
+      
+      - name: Instalando o pacote
+      - run: pip install -e .
+
+      - name: Instalando dependências
+      - run: pip install -r tests/test-requirements.txt
+
+      - name: Executando testes
+      - run: pytest tests
