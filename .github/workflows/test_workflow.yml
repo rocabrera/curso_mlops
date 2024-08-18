@@ -2,8 +2,7 @@ name: My Workflow
 
 on:
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
