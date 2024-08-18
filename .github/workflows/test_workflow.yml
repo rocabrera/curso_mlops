@@ -1,4 +1,4 @@
-name: Primeiro Workflow
+name: My Workflow
 
 on:
   pull_request:
@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Hello World
-        run: echo "Criando meu primeiro workflow"
+        run: echo "Test"
