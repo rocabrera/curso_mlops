@@ -1,15 +1,15 @@
-name: My Workflow
+name: On Pull Request Opened
 
 on:
-  pull_request:
-    branches: [ main ]
+  workflow_call:
+  # pull_request:
+  #   branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  lint:
+    name: Lint Debug Variant
+    uses: ./.github/workflows/job_lint_debug.yml
 
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Hello World
-        run: echo "Test"
+  test:
+    name: Test Debug Variant
+    uses: ./.github/workflows/job_test_debug.yml
