@@ -34,3 +34,8 @@ jobs:
 
       - name: Aplicando pacote de segurança
         run: bandit -c pyproject.toml -r .
+
+  CD:
+    runs-on: ubuntu-latest
+
+    steps:

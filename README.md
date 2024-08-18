@@ -14,6 +14,21 @@ ruff check
 ruff format
 ```
 
+Seguranca da aplicacao:
 ```bash
 bandit -c pyproject.toml -r .
+```
+
+```bash
+bandit -c -q pyproject.toml -r .
+```
+
+Package commands:
+
+```bash
+python -m build
+```
+
+```bash
+python -m twine upload --repository testpypi dist/*
 ```
