@@ -43,3 +43,6 @@ git tag -a v0.0.1 -m "version 0.0.1"
 git tag --delete <version>
 ```
 
+```bash
+git push --follow-tags
+```
