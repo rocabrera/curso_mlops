@@ -12,6 +12,8 @@ jobs:
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
     runs-on: ubuntu-latest
 
+    if: startsWith(github.ref, 'refs/tags/') 
+    
     environment:
       name: testpypi
       url: https://test.pypi.org/p/ml-communication
