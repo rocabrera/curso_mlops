@@ -17,7 +17,7 @@ jobs:
       url: https://test.pypi.org/p/ml-communication
 
     permissions:
-      contents: read
+      contents: write
       id-token: write
 
     steps:
