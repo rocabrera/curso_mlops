@@ -21,10 +21,10 @@ jobs:
           architecture: 'x64'
       
       - name: Instalando o pacote
-      - run: pip install -e .
+        run: pip install -e .
 
       - name: Instalando dependências
-      - run: pip install -r tests/test-requirements.txt
+        run: pip install -r tests/test-requirements.txt
 
       - name: Executando testes
-      - run: pytest tests
+        run: pytest tests
