@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Baixando repositório
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Configurando Python
         uses: actions/setup-python@v5
