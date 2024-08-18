@@ -7,12 +7,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  CD:
+  minor-CD:
     # Sem a tag needs o job de CD seria executado de forma paralela.
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
     runs-on: ubuntu-latest
-
-    # if: startsWith(github.ref, 'refs/tags/v') 
 
     environment:
       name: testpypi
@@ -31,6 +29,11 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
+      - name: Incrementa versão minor
+        run: |
+          VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+          git tag -a $VERSION -m "new release"
+          
       - name: Configurando Python
         uses: actions/setup-python@v5
         with:
@@ -49,4 +52,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+
+      - name: Update package tag
+        run: git push origin $VERSION
         
