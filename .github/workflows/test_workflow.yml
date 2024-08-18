@@ -5,13 +5,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  CI:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: Hello World
-        run: echo "Criando meu primeiro Workflow"
+      - name: Teste Jardel
+        run: echo "Opa que interessante"
 
       # - name: Baixando repositório
       #   uses: actions/checkout@v4
