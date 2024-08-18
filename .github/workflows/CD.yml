@@ -12,8 +12,8 @@ jobs:
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
     runs-on: ubuntu-latest
 
-    if: startsWith(github.ref, 'refs/tags/') 
-    
+    # if: startsWith(github.ref, 'refs/tags/v') 
+
     environment:
       name: testpypi
       url: https://test.pypi.org/p/ml-communication
@@ -23,6 +23,8 @@ jobs:
       id-token: write
 
     steps:
+      - name: Execute github ref
+        run: echo github.ref
       - name: Baixando repositório
         uses: actions/checkout@v4
         with:
