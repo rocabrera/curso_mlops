@@ -7,16 +7,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  minor-CD:
+
+  increase_version:
     # Sem a tag needs o job de CD seria executado de forma paralela.
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
-    if: "startsWith(github.event.head_commit.message, 'minor')"
-
+    
     runs-on: ubuntu-latest
-
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/ml-communication
 
     permissions:
       contents: write
@@ -34,12 +30,25 @@ jobs:
       - name: Incrementa versão minor
         id: tag_increase
         run: |
+          last_commit_message = echo ${{ github.event.head_commit.message }}
+          echo $last_commit_message
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           git tag -a $NEW_VERSION -m "Action adicionando nova versao"
           
+  publish:
+    needs: increase_version
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/ml-communication
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
       - name: Configurando Python
         uses: actions/setup-python@v5
         with:
