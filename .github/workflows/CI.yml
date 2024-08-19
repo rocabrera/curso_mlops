@@ -1,12 +1,19 @@
 name: Primeiro Workflow
 
 on:
-  pull_request:
-    branches: [ "main" ]
+  create:
+    branches: 
+      - feature/*
+  push:
+    branches:
+      - feature/*
 
 jobs:
   CI:
     runs-on: ubuntu-latest
+
+    permissions: 
+      pull-requests: write
 
     steps:
 
@@ -34,3 +41,11 @@ jobs:
 
       - name: Aplicando pacote de segurança
         run: bandit -c pyproject.toml -r .
+
+      - name: create pull request
+        run: |
+          current_branch=$(git branch --show-current)
+          echo $current_branch
+          gh pr create -B main -H $current_branch --title 'Merging' --body 'Created by Github action'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
