@@ -46,6 +46,6 @@ jobs:
         run: |
           current_branch=$(git branch --show-current)
           echo $current_branch
-          gh pr create -B $current_branch -H main --title 'Merging' --body 'Created by Github action'
+          gh pr create -B main -H $current_branch --title 'Merging' --body 'Created by Github action'
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
