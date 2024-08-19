@@ -31,8 +31,7 @@ jobs:
         id: tag_increase
         run: |
 
-          last_commit_message="${{ github.event.head_commit.message }}"
-          echo $last_commit_message
+          last_commit="${{ github.event.head_commit.message }}"
           if [[ $last_commit == patch* ]]; then
               NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
           elif [[ $last_commit == minor* ]]; then
