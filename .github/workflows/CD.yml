@@ -56,5 +56,7 @@ jobs:
       #     repository-url: https://test.pypi.org/legacy/
 
       - name: Update package tag
-        run: git push origin $VERSION
+        run: |
+          echo $VERSION
+          git push origin $VERSION
         
