@@ -21,13 +21,12 @@ jobs:
       id-token: write
 
     steps:
-      - name: Execute github ref
-        run: echo github.ref
       - name: Baixando repositório
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           fetch-tags: true
+          ref: ${{ github.ref_name }}
 
       - name: Incrementa versão minor
         run: |
