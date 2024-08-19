@@ -4,6 +4,9 @@ on:
   create:
     branches: 
       - feature/*
+  push:
+    branches:
+      - feature/*
 
 jobs:
   CI:
