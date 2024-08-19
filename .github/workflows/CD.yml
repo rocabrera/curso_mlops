@@ -35,7 +35,7 @@ jobs:
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
-          git tag -a $NEW_VERSION -m "new release"
+          git tag -a $NEW_VERSION -m "Action adicionando nova versao"
           
       - name: Configurando Python
         uses: actions/setup-python@v5
@@ -45,19 +45,18 @@ jobs:
           # Optional - x64 or x86 architecture, defaults to x64
           architecture: 'x64'
 
-      # - name: Instalando dependências de publicação do pacote
-      #   run: pip install -U build==1.2.1 twine==5.1.1
+      - name: Instalando dependências de publicação do pacote
+        run: pip install -U build==1.2.1 twine==5.1.1
 
-      # - name: Cria o diretório da distribuição
-      #   run: python3 -m build
+      - name: Cria o diretório da distribuição
+        run: python3 -m build
 
-      # - name: Publish distribution 📦 to TestPyPI
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     repository-url: https://test.pypi.org/legacy/
+      - name: Publish distribution 📦 to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
 
       - name: Update package tag
         run: |
-          echo ${{ steps.tag_increase.outputs.NEW_VERSION }}
           git push origin ${{ steps.tag_increase.outputs.NEW_VERSION }}
         
