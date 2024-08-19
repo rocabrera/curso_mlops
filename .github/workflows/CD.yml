@@ -30,11 +30,23 @@ jobs:
       - name: Incrementa versão minor
         id: tag_increase
         run: |
+
           last_commit_message="${{ github.event.head_commit.message }}"
-          echo $last_commit_message
+
+          if [[ $last_commit == patch* ]]; then
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+          elif [[ $last_commit == minor* ]]; then
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $(NF-1)++; $NF=0; print $0}'`
+          elif [[ $last_commit == major* ]]; then
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $1++; $2=0; $3=0; print $0}'`
+          else
+              echo "Não especifica versao, logo não executa código"
+              exit 1
+          fi
+
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
-          NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           git tag -a $NEW_VERSION -m "Action adicionando nova versao"
           
