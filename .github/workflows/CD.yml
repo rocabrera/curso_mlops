@@ -66,9 +66,11 @@ jobs:
           fetch-tags: true
 
       - name: Adiciona Tag
-        git config user.name "$(git log -n 1 --pretty=format:%an)"
-        git config user.email "$(git log -n 1 --pretty=format:%ae)"
-        run: git tag -a "v$NEW_VERSION" -m "Action adicionando nova versao"
+
+        run: |
+          git config user.name "$(git log -n 1 --pretty=format:%an)"
+          git config user.email "$(git log -n 1 --pretty=format:%ae)"
+          git tag -a "v$NEW_VERSION" -m "Action adicionando nova versao"
 
 
       - name: Configurando Python
