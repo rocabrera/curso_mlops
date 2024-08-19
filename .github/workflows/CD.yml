@@ -16,10 +16,6 @@ jobs:
     outputs:
       NEW_VERSION: ${{ steps.tag_increase.outputs.NEW_VERSION }}
 
-    permissions:
-      contents: write
-      id-token: write
-
     steps:
 
       - name: Baixando repositório
@@ -44,9 +40,6 @@ jobs:
               echo "Não especifica versao, logo não executa código"
               exit 1
           fi
-
-          git config user.name "$(git log -n 1 --pretty=format:%an)"
-          git config user.email "$(git log -n 1 --pretty=format:%ae)"
 
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           
@@ -73,6 +66,8 @@ jobs:
           fetch-tags: true
 
       - name: Adiciona Tag
+        git config user.name "$(git log -n 1 --pretty=format:%an)"
+        git config user.email "$(git log -n 1 --pretty=format:%ae)"
         run: git tag -a "v$NEW_VERSION" -m "Action adicionando nova versao"
 
 
