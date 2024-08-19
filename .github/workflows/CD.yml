@@ -29,12 +29,13 @@ jobs:
           # ref: ${{ github.ref_name }}
 
       - name: Incrementa versão minor
+        id: tag_increase
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
-          VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
-          echo $VERSION
-          git tag -a $VERSION -m "new release"
+          NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
+          git tag -a $NEW_VERSION -m "new release"
           
       - name: Configurando Python
         uses: actions/setup-python@v5
@@ -57,6 +58,6 @@ jobs:
 
       - name: Update package tag
         run: |
-          echo $VERSION
-          git push origin $VERSION
+          echo ${{ steps.tag_increase.outputs.NEW_VERSION }}
+          git push origin ${{ steps.tag_increase.outputs.NEW_VERSION }}
         
