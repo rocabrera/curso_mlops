@@ -40,6 +40,9 @@ jobs:
           
   publish:
     needs: increase_version
+
+    runs-on: ubuntu-latest
+    
     environment:
       name: testpypi
       url: https://test.pypi.org/p/ml-communication
