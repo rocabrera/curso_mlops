@@ -27,11 +27,11 @@ jobs:
           last_commit=$(git log -1 --no-merges --pretty=%B)
           echo $last_commit
           if [[ $last_commit == patch* ]]; then
-              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $3+=1; print $0}'`
           elif [[ $last_commit == minor* ]]; then
-              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $(NF-1)++; $NF=0; print $0}'`
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $2+=1; $3=0; print $0}'`
           elif [[ $last_commit == major* ]]; then
-              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $1++; $2=0; $3=0; print $0}'`
+              NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; sub(/^v/, "", $1); $1+=1; $2=0; $3=0; print "v"$0}'`
           else
               echo "Não especifica versao, logo não executa código"
               exit 1
