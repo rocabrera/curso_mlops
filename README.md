@@ -10,7 +10,6 @@ pip install -r requirements-dev.txt
 ruff check
 ```
 
-
 ```bash
 ruff format
 ```
