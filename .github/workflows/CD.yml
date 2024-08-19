@@ -50,9 +50,6 @@ jobs:
 
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           
-
-
-          
           
   publish:
     needs: [increase_version]
@@ -74,7 +71,9 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-          # ref: ${{ github.ref_name }}
+
+      - name: Adiciona Tag
+        run: git tag -a $NEW_VERSION -m "Action adicionando nova versao"
 
       - name: Configurando Python
         uses: actions/setup-python@v5
@@ -98,7 +97,6 @@ jobs:
       - name: Update package tag
         run: |
           echo "${{ needs.increase_version.outputs.NEW_VERSION }}"
-          git tag -a $NEW_VERSION -m "Action adicionando nova versao"
           git push origin ${{ needs.increase_version.outputs.NEW_VERSION }}
           
         
