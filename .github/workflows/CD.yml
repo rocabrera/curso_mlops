@@ -30,7 +30,7 @@ jobs:
       - name: Incrementa versão minor
         id: tag_increase
         run: |
-          last_commit_message = echo ${{ github.event.head_commit.message }}
+          last_commit_message=${{ github.event.head_commit.message }}
           echo $last_commit_message
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
