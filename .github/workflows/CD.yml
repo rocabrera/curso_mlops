@@ -3,7 +3,7 @@ name: Primeiro Workflow
 on:
   # push:
   #   branches: [ "main" ]
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
