@@ -40,6 +40,11 @@ jobs:
               exit 1
           fi
 
+          if ![[ $NEW_VERSION == v* ]]; then
+              echo "Precisa comecar com v a versão"
+              exit 1
+          fi
+
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           
           
@@ -69,7 +74,7 @@ jobs:
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
-          git tag -a "v${{ needs.increase_version.outputs.NEW_VERSION }}" -m "change version"
+          git tag -a "${{ needs.increase_version.outputs.NEW_VERSION }}" -m "change version"
           git tag
 
 
@@ -94,6 +99,6 @@ jobs:
       - name: Update package tag
         run: |
           echo "${{ needs.increase_version.outputs.NEW_VERSION }}"
-          git push origin "v${{ needs.increase_version.outputs.NEW_VERSION }}"
+          git push origin "${{ needs.increase_version.outputs.NEW_VERSION }}"
           
         
