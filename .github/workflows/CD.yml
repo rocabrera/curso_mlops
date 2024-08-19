@@ -14,7 +14,6 @@ jobs:
     outputs:
       NEW_VERSION: ${{ steps.tag_increase.outputs.NEW_VERSION }}
 
-
     steps:
 
       - name: Baixando repositório

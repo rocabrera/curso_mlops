@@ -45,6 +45,7 @@ jobs:
       - name: create pull request
         run: |
           current_branch=$(git rev-parse --abbrev-ref HEAD)
-          gh pr create -B current_branch -H main --title 'Merging' --body 'Created by Github action'
+          echo $current_branch
+          gh pr create -B $current_branch -H main --title 'Merging' --body 'Created by Github action'
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
