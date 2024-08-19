@@ -22,18 +22,11 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-          # ref: ${{ github.ref_name }}
 
       - name: Incrementa versão
         id: tag_increase
         run: |
-
-          # Caso a gente escolher fazer o commit direto na main
-          # last_commit="${{ github.event.head_commit.message }}"
-          # A gente trigga por meio de um merge, logo queremos um commit antes
-
           last_commit=$(git log -1 --no-merges --pretty=%B)
-
           echo $last_commit
           if [[ $last_commit == patch* ]]; then
               NEW_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
