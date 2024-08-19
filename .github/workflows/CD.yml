@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
           fetch-tags: true
-          ref: ${{ github.ref_name }}
+          # ref: ${{ github.ref_name }}
 
       - name: Incrementa versão minor
         run: |
@@ -43,16 +43,16 @@ jobs:
           # Optional - x64 or x86 architecture, defaults to x64
           architecture: 'x64'
 
-      - name: Instalando dependências de publicação do pacote
-        run: pip install -U build==1.2.1 twine==5.1.1
+      # - name: Instalando dependências de publicação do pacote
+      #   run: pip install -U build==1.2.1 twine==5.1.1
 
-      - name: Cria o diretório da distribuição
-        run: python3 -m build
+      # - name: Cria o diretório da distribuição
+      #   run: python3 -m build
 
-      - name: Publish distribution 📦 to TestPyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://test.pypi.org/legacy/
+      # - name: Publish distribution 📦 to TestPyPI
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     repository-url: https://test.pypi.org/legacy/
 
       - name: Update package tag
         run: git push origin $VERSION
