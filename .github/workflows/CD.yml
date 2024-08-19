@@ -70,7 +70,9 @@ jobs:
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
-          git tag -a "v$NEW_VERSION" -m "Action adicionando nova versao"
+          echo "v$NEW_VERSION"
+          git tag -a "v$NEW_VERSION" -m "change version"
+          git tag
 
 
       - name: Configurando Python
@@ -94,6 +96,7 @@ jobs:
 
       - name: Update package tag
         run: |
+          git tag
           echo "${{ needs.increase_version.outputs.NEW_VERSION }}"
           git push origin "v${{ needs.increase_version.outputs.NEW_VERSION }}"
           
