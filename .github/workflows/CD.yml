@@ -10,6 +10,8 @@ jobs:
   minor-CD:
     # Sem a tag needs o job de CD seria executado de forma paralela.
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
+    if: "!startsWith(github.event.head_commit.message, 'minor')"
+
     runs-on: ubuntu-latest
 
     environment:
