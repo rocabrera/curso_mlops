@@ -95,6 +95,6 @@ jobs:
       - name: Update package tag
         run: |
           echo "${{ needs.increase_version.outputs.NEW_VERSION }}"
-          git push origin ${{ needs.increase_version.outputs.NEW_VERSION }}
+          git push origin "v${{ needs.increase_version.outputs.NEW_VERSION }}"
           
         
