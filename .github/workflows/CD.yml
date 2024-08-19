@@ -73,7 +73,7 @@ jobs:
           fetch-tags: true
 
       - name: Adiciona Tag
-        run: git tag -a $NEW_VERSION -m "Action adicionando nova versao"
+        run: git tag -a "v$NEW_VERSION" -m "Action adicionando nova versao"
 
       - name: Configurando Python
         uses: actions/setup-python@v5
