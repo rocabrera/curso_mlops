@@ -24,7 +24,7 @@ jobs:
           fetch-tags: true
           # ref: ${{ github.ref_name }}
 
-      - name: Incrementa versão minor
+      - name: Incrementa versão
         id: tag_increase
         run: |
 
@@ -70,6 +70,7 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           git tag -a "v${{ needs.increase_version.outputs.NEW_VERSION }}" -m "change version"
+          git tag
 
 
       - name: Configurando Python
