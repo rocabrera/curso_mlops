@@ -13,6 +13,8 @@ jobs:
     # Dessa forma, a execução do CD depende do CI ser executado com sucesso.
     
     runs-on: ubuntu-latest
+    outputs:
+      NEW_VERSION: ${{ steps.tag_increase.outputs.NEW_VERSION }}
 
     permissions:
       contents: write
@@ -48,9 +50,12 @@ jobs:
 
           echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_OUTPUT
           git tag -a $NEW_VERSION -m "Action adicionando nova versao"
+
+
+          
           
   publish:
-    needs: increase_version
+    needs: [increase_version]
 
     runs-on: ubuntu-latest
     
@@ -63,6 +68,14 @@ jobs:
       id-token: write
 
     steps:
+
+      - name: Baixando repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          # ref: ${{ github.ref_name }}
+
       - name: Configurando Python
         uses: actions/setup-python@v5
         with:
@@ -84,5 +97,7 @@ jobs:
 
       - name: Update package tag
         run: |
-          git push origin ${{ steps.tag_increase.outputs.NEW_VERSION }}
+        echo ${{ needs.increase_version.outputs.NEW_VERSION }}
+        git push origin ${{ needs.increase_version.outputs.NEW_VERSION }}
+          
         
