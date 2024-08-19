@@ -71,7 +71,7 @@ jobs:
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
           echo "v$NEW_VERSION"
-          git tag -a "v$NEW_VERSION" -m "change version"
+          git tag -a "v${{ needs.increase_version.outputs.NEW_VERSION }}" -m "change version"
           git tag
 
 
